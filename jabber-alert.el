@@ -22,6 +22,7 @@
 (require 'jabber-util)
 
 (require 'cl)
+(require 'alert)
 
 (defgroup jabber-alerts nil "auditory and visual alerts for jabber events"
   :group 'jabber)
@@ -274,6 +275,9 @@ Examples:
   (lambda (text &optional title) (message "%s" (or title text))))
 (define-jabber-alert beep "Beep on event"
   (lambda (&rest ignore) (beep)))
+(define-jabber-alert alert "Show Alert on event"
+  (lambda (text &optional title)
+    (alert (or text title) :title (and text title))))
 
 ;; Message alert hooks
 (defun jabber-message-default-message (from buffer text)
